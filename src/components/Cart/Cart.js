@@ -1,27 +1,35 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
 import Modal from '../UI/Modal';
+import CartContext from '../../store/cart-context';
 
 export default function Cart({ onClose }) {
+  const cartCtx = useContext(CartContext);
+
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const hasItems = cartCtx.items.length > 0;
+
   const cartItems = (
     <CartItems>
-      {[{ id: 'c1', name: 'Sushi', amount: 2, price: 12.99 }].map((item) => (
+      {cartCtx.items.map((item) => (
         <li>{item.name}</li>
       ))}
     </CartItems>
   );
+
   return (
     <Modal onClose={onClose}>
       {cartItems}
       <Total>
         <span>Total Amount</span>
-        <span>35.62</span>
+        <span>{totalAmount}</span>
       </Total>
       <Actions>
         <button className="--alt" onClick={onClose}>
           Close
         </button>
-        <button>Order</button>
+        {hasItems && <button>Order</button>}
       </Actions>
     </Modal>
   );
