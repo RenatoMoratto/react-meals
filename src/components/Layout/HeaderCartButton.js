@@ -1,18 +1,34 @@
-import { useContext } from 'react';
-import styled from 'styled-components';
+import { useContext, useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
+
 import CartContext from '../../store/cart-context';
 import CartIcon from '../Cart/CartIcon';
 
 export default function HeaderCartButton(props) {
-  const cartCtx = useContext(CartContext);
+  const [buttonIsHighLighted, setButtonIsHighLighted] = useState(false);
 
-  const numberOfCartItems = cartCtx.items.reduce(
-    (current, item) => current + item.amount,
-    0
-  );
+  const cartCtx = useContext(CartContext);
+  const { items } = cartCtx;
+
+  const numberOfCartItems = items.reduce((current, item) => current + item.amount, 0);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      return;
+    }
+    setButtonIsHighLighted(true);
+
+    const timer = setTimeout(() => {
+      setButtonIsHighLighted(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [items]);
 
   return (
-    <Button onClick={props.onClick}>
+    <Button className={buttonIsHighLighted ? 'bump' : ''} onClick={props.onClick}>
       <Icon>
         <CartIcon />
       </Icon>
@@ -21,6 +37,24 @@ export default function HeaderCartButton(props) {
     </Button>
   );
 }
+
+const bump = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 const Icon = styled.span`
   width: 1.35rem;
@@ -56,5 +90,9 @@ const Button = styled.button`
 
   &:hover ${Badge}, &:active ${Badge} {
     background-color: #92320c;
+  }
+
+  &.bump {
+    animation: ${bump} 300ms ease-out;
   }
 `;
