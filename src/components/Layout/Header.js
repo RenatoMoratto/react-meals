@@ -33,12 +33,12 @@ const MainImage = styled.div`
   }
 `;
 
-export default function Header() {
+export default function Header({ onShowCart }) {
   return (
     <>
       <StyledHeader>
         <h1>React Meals</h1>
-        <HeaderCartButton />
+        <HeaderCartButton onClick={onShowCart} />
       </StyledHeader>
       <MainImage>
         <img src={mealsImg} alt="A table full of delicious food!" />

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import CartIcon from '../Cart/CartIcon';
 
-export default function HeaderCartButton() {
+export default function HeaderCartButton(props) {
   return (
-    <Button>
+    <Button onClick={props.onClick}>
       <Icon>
         <CartIcon />
       </Icon>
