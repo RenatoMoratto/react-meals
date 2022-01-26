@@ -1,13 +1,16 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export default function Input({ label, input }) {
+const Input = React.forwardRef(({ label, input }, ref) => {
   return (
     <InputWrapper>
       <label htmlFor={input.id}>{label}</label>
-      <input {...input} />
+      <input ref={ref} {...input} />
     </InputWrapper>
   );
-}
+});
+
+export default Input;
 
 const InputWrapper = styled.div`
   display: flex;
