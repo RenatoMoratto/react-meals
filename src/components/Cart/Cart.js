@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Modal from '../UI/Modal';
 import CartContext from '../../store/cart-context';
+import CartItem from './CartItem';
 
 export default function Cart({ onClose }) {
   const cartCtx = useContext(CartContext);
@@ -10,10 +11,21 @@ export default function Cart({ onClose }) {
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
+  const cartItemRemoveHandler = (id) => {};
+
+  const cartItemAddHandler = (item) => {};
+
   const cartItems = (
     <CartItems>
       {cartCtx.items.map((item) => (
-        <li>{item.name}</li>
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
+        />
       ))}
     </CartItems>
   );
