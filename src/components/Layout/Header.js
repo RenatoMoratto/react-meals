@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import mealsImg from '../../assets/meals.jpg';
+import HeaderCartButton from './HeaderCartButton';
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -37,7 +38,7 @@ export default function Header() {
     <>
       <StyledHeader>
         <h1>React Meals</h1>
-        <button>Cart</button>
+        <HeaderCartButton />
       </StyledHeader>
       <MainImage>
         <img src={mealsImg} alt="A table full of delicious food!" />
