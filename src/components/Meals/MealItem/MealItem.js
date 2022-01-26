@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import MealItemForm from './MealItemForm';
 
-export default function MealItem({ name, description, price }) {
+export default function MealItem({ name, description, price, id }) {
   const formattedPrice = `$${price.toFixed(2)}`;
   return (
     <Meal>
@@ -8,6 +9,9 @@ export default function MealItem({ name, description, price }) {
         <h3>{name}</h3>
         <Description>{description}</Description>
         <Price>{formattedPrice}</Price>
+      </div>
+      <div>
+        <MealItemForm id={id} />
       </div>
     </Meal>
   );
