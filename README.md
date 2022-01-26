@@ -1,4 +1,4 @@
-# Food Order App
+# React Meals | Food Order App
 
 This is the first practice project for the Academind course [React - The Complete Guide](https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=D_0122).
 
@@ -7,6 +7,7 @@ This is the first practice project for the Academind course [React - The Complet
 ## Technologies
 
 - [React](https://reactjs.org/)
+- [Styled Components](https://styled-components.com/)
 
 ---
 
