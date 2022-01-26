@@ -13,7 +13,9 @@ export default function Cart({ onClose }) {
 
   const cartItemRemoveHandler = (id) => {};
 
-  const cartItemAddHandler = (item) => {};
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
 
   const cartItems = (
     <CartItems>
