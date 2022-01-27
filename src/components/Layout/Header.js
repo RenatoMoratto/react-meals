@@ -3,6 +3,20 @@ import styled from 'styled-components';
 import mealsImg from '../../assets/meals.jpg';
 import HeaderCartButton from './HeaderCartButton';
 
+export default function Header({ onShowCart }) {
+  return (
+    <>
+      <StyledHeader>
+        <h1>React Meals</h1>
+        <HeaderCartButton onClick={onShowCart} />
+      </StyledHeader>
+      <MainImage>
+        <img src={mealsImg} alt="A table full of delicious food!" />
+      </MainImage>
+    </>
+  );
+}
+
 const StyledHeader = styled.header`
   position: fixed;
   top: 0;
@@ -32,17 +46,3 @@ const MainImage = styled.div`
     transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
   }
 `;
-
-export default function Header({ onShowCart }) {
-  return (
-    <>
-      <StyledHeader>
-        <h1>React Meals</h1>
-        <HeaderCartButton onClick={onShowCart} />
-      </StyledHeader>
-      <MainImage>
-        <img src={mealsImg} alt="A table full of delicious food!" />
-      </MainImage>
-    </>
-  );
-}
