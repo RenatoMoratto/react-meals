@@ -2,6 +2,10 @@
 
 This is the first practice project for the Academind course [React - The Complete Guide](https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=D_0122).
 
+During the course, the instructor used css modules as a tool to style the components, however, aiming at a better organization of the code and easier maintenance, I decided to use the CSS in JS technique, implementing the styles with the styled-components library.
+
+I also added more responsiveness to the project, since most people access the internet through their cell phones.
+
 ---
 
 ## Technologies
