@@ -45,8 +45,8 @@ const BackdropStyle = styled.div`
 const ModalOverlay = styled.div`
   position: fixed;
   top: 20vh;
-  left: 5%;
-  width: 90%;
+  width: 40rem;
+  left: calc(50% - 20rem);
   background-color: white;
   padding: 1rem;
   border-radius: 14px;
@@ -54,8 +54,12 @@ const ModalOverlay = styled.div`
   z-index: 30;
   animation: ${slideDown} 300ms ease-out forwards;
 
-  @media (min-width: 768px) {
-    width: 40rem;
-    left: calc(50% - 20rem);
+  @media (max-width: 768px) {
+    left: 5%;
+    width: 85%;
+  }
+
+  @media (max-width: 320px) {
+    width: 80%;
   }
 `;

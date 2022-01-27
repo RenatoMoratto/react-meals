@@ -76,9 +76,9 @@ const Amount = styled.span`
 
 const Actions = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
   }
 `;

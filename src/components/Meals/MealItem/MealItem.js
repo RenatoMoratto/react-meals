@@ -14,9 +14,11 @@ export default function MealItem({ name, description, price, id }) {
 
   return (
     <Meal>
-      <div>
-        <h3>{name}</h3>
-        <Description>{description}</Description>
+      <div className="item">
+        <div>
+          <h3>{name}</h3>
+          <Description>{description}</Description>
+        </div>
         <Price>{formattedPrice}</Price>
       </div>
       <div>
@@ -35,6 +37,17 @@ const Meal = styled.li`
 
   h3 {
     margin: 0 0 0.25rem 0;
+  }
+
+  @media (max-width: 425px) {
+    flex-direction: column;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
   }
 `;
 

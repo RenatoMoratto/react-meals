@@ -32,7 +32,7 @@ export default function HeaderCartButton(props) {
       <Icon>
         <CartIcon />
       </Icon>
-      <span>Your Cart</span>
+      <span className="label">Your Cart</span>
       <Badge>{numberOfCartItems}</Badge>
     </Button>
   );
@@ -94,5 +94,19 @@ const Button = styled.button`
 
   &.bump {
     animation: ${bump} 300ms ease-out;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem;
+
+    ${Icon} {
+      width: 1.75rem;
+      height: 1.75rem;
+      margin-right: 0.5rem;
+    }
+
+    .label {
+      display: none;
+    }
   }
 `;

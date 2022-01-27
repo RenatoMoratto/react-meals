@@ -33,4 +33,8 @@ const Summary = styled.section`
     font-size: 2rem;
     margin-top: 0;
   }
+
+  @media (max-width: 425px) {
+    width: 85%;
+  }
 `;

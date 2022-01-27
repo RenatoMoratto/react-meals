@@ -42,10 +42,10 @@ export default function Cart({ onClose }) {
         <span>{totalAmount}</span>
       </Total>
       <Actions>
+        {hasItems && <button>Order</button>}
         <button className="--alt" onClick={onClose}>
           Close
         </button>
-        {hasItems && <button>Order</button>}
       </Actions>
     </Modal>
   );
@@ -92,5 +92,11 @@ const Actions = styled.div`
   .--alt {
     background-color: transparent;
     color: #8a2b06;
+  }
+
+  @media (max-width: 425px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;

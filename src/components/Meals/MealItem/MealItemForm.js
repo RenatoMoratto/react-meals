@@ -64,4 +64,17 @@ const Form = styled.form`
     background-color: #641e03;
     border-color: #641e03;
   }
+
+  @media (max-width: 425px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 320px) {
+    flex-direction: column;
+    button {
+      width: 100%;
+    }
+  }
 `;
