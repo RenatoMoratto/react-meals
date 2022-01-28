@@ -1,27 +1,79 @@
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 
+const isNotEmpty = (value) => value.trim() !== '';
+const isFiveOrEightChars = (value) =>
+  value.trim().length === 5 || value.trim().length === 8;
+
 export default function Checkout({ onCancel }) {
+  const [formInputsValidity, setFormInputsValidity] = useState({
+    name: true,
+    street: true,
+    postalCode: true,
+    city: true,
+  });
+
+  const nameInputRef = useRef();
+  const streetInputRef = useRef();
+  const postalInputRef = useRef();
+  const cityInputRef = useRef();
+
   const confirmHandler = (event) => {
     event.preventDefault();
+
+    const enteredName = nameInputRef.current.value;
+    const enteredStreet = streetInputRef.current.value;
+    const enteredPostalCode = postalInputRef.current.value;
+    const enteredCity = cityInputRef.current.value;
+
+    const enteredNameIsValid = isNotEmpty(enteredName);
+    const enteredStreetIsValid = isNotEmpty(enteredStreet);
+    const enteredPostalCodeIsValid = isFiveOrEightChars(enteredPostalCode);
+    const enteredCityIsValid = isNotEmpty(enteredCity);
+
+    setFormInputsValidity({
+      name: enteredNameIsValid,
+      street: enteredStreetIsValid,
+      postalCode: enteredPostalCodeIsValid,
+      city: enteredCityIsValid,
+    });
+
+    const formIsValid =
+      enteredNameIsValid &&
+      enteredStreetIsValid &&
+      enteredPostalCodeIsValid &&
+      enteredCityIsValid;
+
+    if (!formIsValid) {
+      return;
+    }
+
+    event.target.reset();
   };
 
   return (
-    <Form>
-      <Control>
+    <Form onSubmit={confirmHandler}>
+      <Control invalid={!formInputsValidity.name}>
         <label htmlFor="name">Your Name</label>
-        <input type="text" id="name" />
+        <input type="text" id="name" ref={nameInputRef} />
+        {!formInputsValidity.name && <p>Please enter a valid name!</p>}
       </Control>
-      <Control>
+      <Control invalid={!formInputsValidity.street}>
         <label htmlFor="street">Street</label>
-        <input type="text" id="street" />
+        <input type="text" id="street" ref={streetInputRef} />
+        {!formInputsValidity.street && <p>Please enter a valid street!</p>}
       </Control>
-      <Control>
+      <Control invalid={!formInputsValidity.postalCode}>
         <label htmlFor="postal">Postal Code</label>
-        <input type="text" id="postal" />
+        <input type="text" id="postal" ref={postalInputRef} />
+        {!formInputsValidity.postalCode && (
+          <p>Please enter a valid postal code (5 or 8 characters long)!</p>
+        )}
       </Control>
-      <Control>
+      <Control invalid={!formInputsValidity.city}>
         <label htmlFor="city">City</label>
-        <input type="text" id="city" />
+        <input type="text" id="city" ref={cityInputRef} />
+        {!formInputsValidity.city && <p>Please enter a valid city!</p>}
       </Control>
       <Actions>
         <button className="submit">Confirm</button>
@@ -55,6 +107,20 @@ const Control = styled.div`
     width: 20rem;
     max-width: 100%;
   }
+
+  ${({ invalid }) =>
+    invalid &&
+    `
+    label {
+    color: #ca3e51;
+  }
+    input {
+    border-color: #aa0b20;
+    background-color: #ffeff1;
+  }
+    p {
+    color: #ca3e51;
+  }`}
 `;
 
 const Actions = styled.div`
@@ -86,14 +152,5 @@ const Actions = styled.div`
   .submit:hover,
   .submit:active {
     background-color: #7a2706;
-  }
-
-  .invalid label {
-    color: #ca3e51;
-  }
-
-  .invalid input {
-    border-color: #aa0b20;
-    background-color: #ffeff1;
   }
 `;
