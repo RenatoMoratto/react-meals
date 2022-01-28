@@ -40,7 +40,6 @@ export default function MealItemForm({ id, onAddToCart }) {
           min: '1',
           max: '5',
           step: '1',
-          defaultValue: '1',
           value: amount,
           onChange: changeHandler,
         }}
