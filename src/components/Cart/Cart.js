@@ -39,6 +39,8 @@ export default function Cart({ onClose }) {
     });
     setIsSubmitting(false);
     setDidSubmit(true);
+
+    cartCtx.clearCart();
   };
 
   const cartItems = (
