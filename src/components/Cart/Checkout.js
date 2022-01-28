@@ -5,7 +5,7 @@ const isNotEmpty = (value) => value.trim() !== '';
 const isFiveOrEightChars = (value) =>
   value.trim().length === 5 || value.trim().length === 8;
 
-export default function Checkout({ onCancel }) {
+export default function Checkout({ onConfirm, onCancel }) {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -47,6 +47,13 @@ export default function Checkout({ onCancel }) {
     if (!formIsValid) {
       return;
     }
+
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      postalCode: enteredPostalCode,
+      city: enteredCity,
+    });
 
     event.target.reset();
   };
