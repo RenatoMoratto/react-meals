@@ -8,6 +8,8 @@ import Checkout from './Checkout';
 
 export default function Cart({ onClose }) {
   const [isCheckout, setIsCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
 
   const cartCtx = useContext(CartContext);
 
@@ -27,6 +29,7 @@ export default function Cart({ onClose }) {
   };
 
   const submitOrderHandler = (userData) => {
+    setIsSubmitting(true);
     fetch('https://react-meals-web-app-default-rtdb.firebaseio.com/orders.json', {
       method: 'POST',
       body: JSON.stringify({
@@ -34,6 +37,8 @@ export default function Cart({ onClose }) {
         orderedItems: cartCtx.items,
       }),
     });
+    setIsSubmitting(false);
+    setDidSubmit(true);
   };
 
   const cartItems = (
@@ -60,8 +65,8 @@ export default function Cart({ onClose }) {
     </Actions>
   );
 
-  return (
-    <Modal onClose={onClose}>
+  const cartModalContent = (
+    <>
       {cartItems}
       <Total>
         <span>Total Amount</span>
@@ -69,6 +74,25 @@ export default function Cart({ onClose }) {
       </Total>
       {isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={onClose} />}
       {!isCheckout && modalActions}
+    </>
+  );
+
+  const isSubmittingModalContent = <p>Sending order data...</p>;
+
+  const didSubmitModalContent = (
+    <>
+      <p>Successfully sent the order!</p>
+      <Actions>
+        <button onClick={onClose}>Close</button>
+      </Actions>
+    </>
+  );
+
+  return (
+    <Modal onClose={onClose}>
+      {!isSubmitting && !didSubmit && cartModalContent}
+      {isSubmitting && isSubmittingModalContent}
+      {!isSubmitting && didSubmit && didSubmitModalContent}
     </Modal>
   );
 }
