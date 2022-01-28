@@ -96,6 +96,10 @@ const Form = styled.form`
   margin: 1rem 0;
   height: 19rem;
   overflow: auto;
+
+  @media (max-width: 425px) {
+    height: 20rem;
+  }
 `;
 
 const Control = styled.div`
@@ -128,6 +132,12 @@ const Control = styled.div`
     p {
     color: #ca3e51;
   }`}
+
+  @media (max-width: 425px) {
+    input {
+      width: 95%;
+    }
+  }
 `;
 
 const Actions = styled.div`
@@ -159,5 +169,10 @@ const Actions = styled.div`
   .submit:hover,
   .submit:active {
     background-color: #7a2706;
+  }
+
+  @media (max-width: 425px) {
+    justify-content: center;
+    margin-top: 1rem;
   }
 `;

@@ -85,7 +85,9 @@ export default function Cart({ onClose }) {
     <>
       <p>Successfully sent the order!</p>
       <Actions>
-        <button onClick={onClose}>Close</button>
+        <button className="--single" onClick={onClose}>
+          Close
+        </button>
       </Actions>
     </>
   );
@@ -140,6 +142,10 @@ const Actions = styled.div`
   .--alt {
     background-color: transparent;
     color: #8a2b06;
+  }
+
+  .--single {
+    margin-left: 0;
   }
 
   @media (max-width: 425px) {
