@@ -7,10 +7,17 @@ import MealItem from './MealItem/MealItem';
 export default function AvailableMeals() {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
     fetch('https://react-meals-web-app-default-rtdb.firebaseio.com/meals.json')
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }
+
+        return response.json();
+      })
       .then((data) => {
         const loadedMeals = [];
 
@@ -24,6 +31,11 @@ export default function AvailableMeals() {
         }
 
         setMeals(loadedMeals);
+      })
+      .catch((error) => {
+        setHttpError(error.message);
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   }, []);
@@ -33,6 +45,14 @@ export default function AvailableMeals() {
       <MealsLoading>
         <p>Loading...</p>
       </MealsLoading>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <MealsError>
+        <p>{httpError}</p>
+      </MealsError>
     );
   }
 
@@ -58,6 +78,11 @@ export default function AvailableMeals() {
 const MealsLoading = styled.section`
   text-align: center;
   color: #fff;
+`;
+
+const MealsError = styled.section`
+  text-align: center;
+  color: #f00;
 `;
 
 const mealsAppear = keyframes`
