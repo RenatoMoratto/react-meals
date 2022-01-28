@@ -2,6 +2,8 @@
 
 This is the first practice project for the Academind course [React - The Complete Guide](https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=D_0122).
 
+The objective of the project is to simulate a food order app, where the user can select the meals on the main page and finish his order at the cart modal. The finished orders are sent to a Firebase Realtime Database.
+
 During the course, the instructor used css modules as a tool to style the components, however, aiming at a better organization of the code and easier maintenance, I decided to use the CSS in JS technique, implementing the styles with the styled-components library.
 
 I also added more responsiveness to the project, since most people access the internet through their cell phones.
@@ -12,6 +14,7 @@ I also added more responsiveness to the project, since most people access the in
 
 - [React](https://reactjs.org/)
 - [Styled Components](https://styled-components.com/)
+- [Firebase](https://firebase.google.com/docs)
 
 ---
 
