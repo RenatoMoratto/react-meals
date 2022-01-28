@@ -44,7 +44,7 @@ const BackdropStyle = styled.div`
 
 const ModalOverlay = styled.div`
   position: fixed;
-  top: 20vh;
+  top: 15vh;
   width: 40rem;
   left: calc(50% - 20rem);
   background-color: white;

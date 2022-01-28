@@ -1,11 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import Modal from '../UI/Modal';
 import CartContext from '../../store/cart-context';
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 
 export default function Cart({ onClose }) {
+  const [isCheckout, setIsCheckout] = useState(false);
+
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
@@ -17,6 +20,10 @@ export default function Cart({ onClose }) {
 
   const cartItemAddHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const orderHandler = () => {
+    setIsCheckout(true);
   };
 
   const cartItems = (
@@ -34,6 +41,15 @@ export default function Cart({ onClose }) {
     </CartItems>
   );
 
+  const modalActions = (
+    <Actions>
+      {hasItems && <button onClick={orderHandler}>Order</button>}
+      <button className="--alt" onClick={onClose}>
+        Close
+      </button>
+    </Actions>
+  );
+
   return (
     <Modal onClose={onClose}>
       {cartItems}
@@ -41,12 +57,7 @@ export default function Cart({ onClose }) {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </Total>
-      <Actions>
-        {hasItems && <button>Order</button>}
-        <button className="--alt" onClick={onClose}>
-          Close
-        </button>
-      </Actions>
+      {isCheckout ? <Checkout onCancel={onClose} /> : modalActions}
     </Modal>
   );
 }
