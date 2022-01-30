@@ -59,6 +59,11 @@ const ModalOverlay = styled.div`
     width: 85%;
   }
 
+  @media (max-width: 425px) {
+    height: 75vh;
+    overflow: scroll;
+  }
+
   @media (max-width: 320px) {
     width: 80%;
   }
